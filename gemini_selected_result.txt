@@ -1,0 +1,8 @@
+Category: 종합(KR)
+Selected ID: 5
+
+Category: 경제(KR)
+Selected ID: 19
+
+Category: 경제(US)
+Selected ID: 21

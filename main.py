@@ -552,15 +552,19 @@ def generate_huggingface_images(selected_articles, run_dir):
     return selected_articles
 
 # Step 9-3. 생성된 이미지 하단에 그라데이션과 기사 텍스트를 합성합니다.
-def load_korean_font(size):
-    font_path = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
+def load_korean_font(size, bold=False):
+    if bold:
+        font_path = "/System/Library/Fonts/Supplemental/AppleGothic.ttf"
+    else:
+        font_path = "/System/Library/Fonts/AppleSDGothicNeo.ttc"
+
     fallback_path = "/System/Library/Fonts/Supplemental/AppleGothic.ttf"
 
     try:
         return ImageFont.truetype(font_path, size=size)
     except OSError:
         return ImageFont.truetype(fallback_path, size=size)
-
+\
 
 def apply_bottom_gradient(image):
     image = image.convert("RGBA")
@@ -646,25 +650,29 @@ def render_news_image_overlay(article):
     image = apply_bottom_gradient(image)
     draw = ImageDraw.Draw(image)
 
-    label_font = load_korean_font(45)
-    title_font = load_korean_font(55)
+    label_font = load_korean_font(45, bold=True)
+    title_font = load_korean_font(55, bold=True)
     footer_font = load_korean_font(35)
 
     x = 75
-    label_y = 1050
-    title_y = 1120
-    footer_y = 1250
+    label_y = 970
+    title_y = 1040
+    footer_y = 1190
     max_width = image.size[0] - (x * 2)
 
     label = "[속보]"
     title = extract_poster_title(article)
     footer = f"출처: {article.get('source', '')} | {datetime.now().strftime('%Y.%m.%d')}"
 
-    draw.text((x, label_y), label, fill="#FFFFFF", font=label_font)
+    for dx, dy in [(0, 0), (1, 0), (0, 1), (1, 1)]:
+        draw.text((x + dx, label_y + dy), label, fill="#FFFFFF", font=label_font)
 
     title_lines = wrap_text(draw, title, title_font, max_width=max_width, max_lines=2)
     for idx, line in enumerate(title_lines):
-        draw.text((x, title_y + (idx * 70)), line, fill="#FFFFFF", font=title_font)
+        y = title_y + (idx * 70)
+
+        for dx, dy in [(0, 0), (1, 0), (0, 1), (1, 1), (2, 0), (0, 2)]:
+            draw.text((x + dx, y + dy), line, fill="#FFFFFF", font=title_font)
 
     draw.text((x, footer_y), footer, fill=(221, 221, 221, 215), font=footer_font)
 

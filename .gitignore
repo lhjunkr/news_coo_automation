@@ -4,3 +4,20 @@ __pycache__/
 .DS_Store
 .venv/
 venv/
+
+# Generated automation outputs
+outputs/
+generated_images/
+
+# Generated text outputs
+generated_images.txt
+selected_news.txt
+selected_articles.txt
+instagram_captions.txt
+sdxl_image_prompts.txt
+gemini_selected_result.txt
+failed_categories.txt
+
+# Local run history
+history.txt
+history.jsonl

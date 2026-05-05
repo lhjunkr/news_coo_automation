@@ -1,8 +1,8 @@
-# Instagram Automation
+# Instagram/Facebook News Automation
 
-A Python automation pipeline for turning daily news into Instagram-ready content.
+A Python automation pipeline for turning daily news into Instagram and Facebook-ready content.
 
-The project collects news candidates from Google News, uses Gemini to select relevant articles, extracts article bodies, generates Korean Instagram captions, creates poster images, uploads final images to Cloudflare R2, and prepares Instagram/Facebook publishing through the Meta Graph API.
+The project collects news candidates from Google News, uses Gemini to select relevant articles, extracts article bodies, generates Korean social media captions, creates poster images, uploads final images to Cloudflare R2, and prepares Instagram/Facebook publishing through the Meta Graph API.
 
 ## Current Status
 
@@ -21,7 +21,7 @@ This project is still in development.
 4. Ask Gemini to choose a primary and backup article for each category.
 5. Resolve selected Google News links into original publisher URLs.
 6. Extract article body text using `requests` and `trafilatura`.
-7. Generate Korean Instagram captions with Gemini.
+7. Generate Korean social media captions with Gemini.
 8. Generate SDXL image prompts with Gemini.
 9. Generate poster images through Hugging Face.
 10. Add Korean title text and a bottom gradient overlay with Pillow.
@@ -35,7 +35,7 @@ This project is still in development.
 - Gemini-based article selection with primary/backup fallback
 - Google News URL decoding
 - Article body extraction
-- Korean Instagram caption generation
+- Korean social media caption generation
 - SDXL image prompt generation
 - Hugging Face image generation
 - Poster title overlay with Korean font support
